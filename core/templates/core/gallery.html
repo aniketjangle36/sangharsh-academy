@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="hero-gradient py-16 text-white text-center">
+  <h1 class="text-4xl font-black">गॅलरी</h1>
+  <p class="text-saffron text-lg mt-2">Photo Gallery – Training, Events & Results</p>
+</div>
+
+<section class="py-10 max-w-7xl mx-auto px-4">
+
+  <!-- Category Filters -->
+  <div class="flex flex-wrap gap-2 mb-8 justify-center">
+    <a href="?cat=" class="px-5 py-2 rounded-full text-sm font-bold {% if not active_cat %}bg-navyblue text-white{% else %}bg-white text-gray-600 border hover:bg-gray-50{% endif %}">
+      सर्व फोटो
+    </a>
+    {% for cat_key, cat_name in categories %}
+    <a href="?cat={{ cat_key }}"
+       class="px-5 py-2 rounded-full text-sm font-bold transition
+              {% if active_cat == cat_key %}bg-saffron text-white{% else %}bg-white text-gray-600 border hover:bg-gray-50{% endif %}">
+      {{ cat_name }}
+    </a>
+    {% endfor %}
+  </div>
+
+  {% if images %}
+  <!-- Masonry Grid -->
+  <div class="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
+    {% for img in images %}
+    <div class="break-inside-avoid rounded-xl overflow-hidden shadow card-hover cursor-pointer" onclick="openLightbox('{{ img.image.url }}', '{{ img.title }}')">
+      <img src="{{ img.image.url }}" alt="{{ img.title|default:'Gallery' }}"
+           class="w-full object-cover hover:scale-105 transition-transform duration-300 rounded-xl"/>
+      {% if img.title %}
+      <div class="bg-black bg-opacity-50 text-white text-xs px-3 py-1 text-center">{{ img.title }}</div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="text-center py-20">
+    <div class="text-6xl mb-4">🖼️</div>
+    <h3 class="text-xl font-bold text-gray-400">गॅलरी लवकरच येईल</h3>
+    <p class="text-sm text-gray-400 mt-2">Admin मधून photos upload करा</p>
+  </div>
+  {% endif %}
+
+</section>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-[9999] hidden items-center justify-center p-4" onclick="closeLightbox()">
+  <div class="max-w-4xl w-full text-center" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="" class="max-h-[80vh] mx-auto rounded-xl shadow-2xl object-contain"/>
+    <p id="lightbox-title" class="text-white text-sm mt-3"></p>
+    <button onclick="closeLightbox()" class="mt-4 text-white bg-white bg-opacity-20 hover:bg-opacity-30 px-6 py-2 rounded-full">✕ बंद करा</button>
+  </div>
+</div>
+
+<script>
+function openLightbox(src, title) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-title').textContent = title;
+  document.getElementById('lightbox').style.display = 'flex';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+</script>
+
+{% endblock %}

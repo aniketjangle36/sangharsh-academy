@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="hero-gradient py-16 text-white text-center">
+  <h1 class="text-4xl font-black">संपर्क करा</h1>
+  <p class="text-saffron text-lg mt-2">Contact Us – Admission Enquiry</p>
+</div>
+
+<section class="py-16 max-w-7xl mx-auto px-4">
+  <div class="grid lg:grid-cols-2 gap-12">
+
+    <!-- CONTACT FORM -->
+    <div class="bg-white rounded-2xl shadow p-8">
+      <h2 class="text-2xl font-black text-navyblue mb-6">Admission Inquiry Form</h2>
+
+      <form method="POST" class="space-y-4">
+        {% csrf_token %}
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-1">पूर्ण नाव * <span class="font-normal text-gray-400">(Full Name)</span></label>
+          <input type="text" name="name" required
+                 class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:border-saffron text-sm"
+                 placeholder="तुमचे पूर्ण नाव लिहा"/>
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-1">मोबाईल नंबर * <span class="font-normal text-gray-400">(Mobile)</span></label>
+          <input type="tel" name="mobile" required pattern="[0-9]{10}"
+                 class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:border-saffron text-sm"
+                 placeholder="10 अंकी मोबाईल नंबर"/>
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-1">ईमेल <span class="font-normal text-gray-400">(optional)</span></label>
+          <input type="email" name="email"
+                 class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:border-saffron text-sm"
+                 placeholder="your@email.com"/>
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-1">संदेश * <span class="font-normal text-gray-400">(Message)</span></label>
+          <textarea name="message" required rows="4"
+                    class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:border-saffron text-sm resize-none"
+                    placeholder="तुम्हाला कोणत्या कोर्सबद्दल माहिती हवी आहे? Army / Police?"></textarea>
+        </div>
+        <button type="submit"
+                class="w-full bg-saffron hover:bg-orange-400 text-white font-black py-4 rounded-xl text-lg transition">
+          📤 Inquiry पाठवा
+        </button>
+      </form>
+
+      <!-- OR WhatsApp -->
+      <div class="text-center mt-6">
+        <p class="text-gray-400 text-sm mb-3">किंवा थेट WhatsApp वर संपर्क करा</p>
+        <a href="https://wa.me/{{ whatsapp_number }}?text=Hello%2C%20I%20want%20to%20know%20about%20admission%20in%20Sangharsh%20Academy%20Fulambri"
+           target="_blank"
+           class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-3 rounded-full transition">
+          <i class="fab fa-whatsapp text-xl"></i> WhatsApp करा: {{ academy.whatsapp }}
+        </a>
+      </div>
+    </div>
+
+    <!-- CONTACT INFO + MAP -->
+    <div class="space-y-6">
+      <!-- Info Cards -->
+      <div class="bg-navyblue text-white rounded-2xl p-6 space-y-4">
+        <h3 class="font-black text-lg text-saffron">📍 आमचा पत्ता</h3>
+        <p class="text-gray-300">{{ academy.address_mr }}</p>
+        <p class="text-gray-300">{{ academy.address_en }}</p>
+        <div class="space-y-3 pt-2 border-t border-blue-800">
+          <a href="tel:9049883668" class="flex items-center gap-3 hover:text-saffron transition">
+            <i class="fas fa-phone-alt text-saffron"></i>
+            <span>9049883668</span>
+          </a>
+          <a href="https://wa.me/9049883668" target="_blank" class="flex items-center gap-3 hover:text-green-400 transition">
+            <i class="fab fa-whatsapp text-green-400"></i>
+            <span>9049883668</span>
+          </a>
+          {% if academy.email %}
+          <a href="mailto:{{ academy.email }}" class="flex items-center gap-3 hover:text-saffron transition">
+            <i class="fas fa-envelope text-saffron"></i>
+            <span>{{ academy.email }}</span>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Timing -->
+      <div class="bg-green-50 border border-green-200 rounded-2xl p-5">
+        <h3 class="font-bold text-green-800 mb-3">🕐 अकॅडमी वेळापत्रक</h3>
+        <div class="text-sm text-green-700 space-y-1">
+          <div class="flex justify-between"><span>Physical Training</span><span class="font-bold">सकाळी 5:00 – 8:00</span></div>
+          <div class="flex justify-between"><span>Classroom</span><span class="font-bold">सकाळी 8:30 – 1:30</span></div>
+          <div class="flex justify-between"><span>Evening PT</span><span class="font-bold">सायं 4:00 – 6:00</span></div>
+          <div class="flex justify-between"><span>Office / Inquiry</span><span class="font-bold">सकाळी 9 – सायं 6</span></div>
+        </div>
+      </div>
+
+      <!-- Google Map -->
+      <div class="rounded-2xl overflow-hidden shadow h-64 bg-gray-200">
+        {% if academy.google_map_embed %}
+          {{ academy.google_map_embed|safe }}
+        {% else %}
+          <iframe
+            src="https://maps.google.com/maps?q=Fulambri+Chhatrapati+Sambhajinagar+Maharashtra&output=embed"
+            width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy">
+          </iframe>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

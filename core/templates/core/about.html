@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Page Header -->
+<div class="hero-gradient py-16 text-white text-center">
+  <h1 class="text-4xl font-black">आमच्याविषयी</h1>
+  <p class="text-saffron text-lg mt-2">About Sangharsh Career Academy Phulambri</p>
+  <nav class="text-sm text-gray-300 mt-3">
+    <a href="{% url 'home' %}" class="hover:text-white">Home</a> / About Us
+  </nav>
+</div>
+
+<section class="py-16 max-w-7xl mx-auto px-4">
+  <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+    <div>
+      {% if academy.about_image %}
+        <img src="{{ academy.about_image.url }}" alt="Academy" class="rounded-2xl shadow-xl w-full"/>
+      {% else %}
+        <div class="bg-gradient-to-br from-navyblue to-armygreen rounded-2xl h-80 flex items-center justify-center text-white text-6xl">🏫</div>
+      {% endif %}
+    </div>
+    <div>
+      <h2 class="text-3xl font-black text-navyblue mb-4">{{ academy.name_mr }}</h2>
+      <p class="text-saffron font-bold mb-4">{{ academy.tagline_mr }}</p>
+      <div class="prose text-gray-700 leading-relaxed">
+        {{ academy.about_text_mr|default:"संघर्ष करिअर अकॅडमी फुलंब्री ही महाराष्ट्रातील सर्वात विश्वासू भरती पूर्व प्रशिक्षण संस्था आहे. आमची स्थापना 2018 मध्ये झाली असून आजपर्यंत 500 हून अधिक विद्यार्थी आर्मी, पोलीस व इतर सशस्त्र दलांत निवडले गेले आहेत. आमचे उद्दिष्ट म्हणजे प्रत्येक विद्यार्थ्याला शिस्त, कौशल्य, आणि आत्मविश्वास देऊन देशसेवेसाठी तयार करणे." }}
+      </div>
+      <div class="mt-6 grid grid-cols-2 gap-4">
+        <div class="text-center bg-navyblue text-white rounded-xl p-4">
+          <div class="text-3xl font-black text-saffron">{{ academy.established_year }}</div>
+          <p class="text-sm">स्थापना वर्ष</p>
+        </div>
+        <div class="text-center bg-armygreen text-white rounded-xl p-4">
+          <div class="text-3xl font-black text-saffron">{{ academy.students_selected }}+</div>
+          <p class="text-sm">विद्यार्थी निवड</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mission Vision -->
+  <div class="grid md:grid-cols-3 gap-6 mb-16">
+    <div class="bg-navyblue text-white rounded-2xl p-6 text-center">
+      <div class="text-5xl mb-4">🎯</div>
+      <h3 class="font-bold text-lg text-saffron mb-2">ध्येय | Mission</h3>
+      <p class="text-sm text-gray-300">प्रत्येक इच्छुक उमेदवाराला दर्जेदार प्रशिक्षण देऊन त्यांचे आर्मी / पोलीसचे स्वप्न पूर्ण करणे.</p>
+    </div>
+    <div class="bg-armygreen text-white rounded-2xl p-6 text-center">
+      <div class="text-5xl mb-4">👁️</div>
+      <h3 class="font-bold text-lg text-saffron mb-2">दृष्टी | Vision</h3>
+      <p class="text-sm text-gray-300">महाराष्ट्रातील क्रमांक एकचे भरती प्रशिक्षण केंद्र बनणे आणि ग्रामीण तरुणांना संधी देणे.</p>
+    </div>
+    <div class="bg-saffron text-white rounded-2xl p-6 text-center">
+      <div class="text-5xl mb-4">💪</div>
+      <h3 class="font-bold text-lg mb-2">मूल्ये | Values</h3>
+      <p class="text-sm">शिस्त | निष्ठा | कठोर परिश्रम | राष्ट्रप्रेम | सत्यनिष्ठा</p>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+  <div class="bg-gray-50 rounded-2xl p-8">
+    <h2 class="text-2xl font-black text-navyblue text-center mb-8">आमचे वेगळेपण | Why Choose Us?</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {% for item in "123456"|make_list %}
+      <div class="flex items-start gap-3 bg-white rounded-xl p-4 shadow-sm">
+        <span class="text-green-500 text-2xl mt-1">✅</span>
+        <div>
+          {% if forloop.counter == 1 %}<h4 class="font-bold">अनुभवी प्रशिक्षक</h4><p class="text-sm text-gray-500">10+ वर्षांचा अनुभव असलेले तज्ञ प्रशिक्षक</p>
+          {% elif forloop.counter == 2 %}<h4 class="font-bold">Physical Training</h4><p class="text-sm text-gray-500">Ground, Gym व Swimming सुविधा</p>
+          {% elif forloop.counter == 3 %}<h4 class="font-bold">Written Exam Coaching</h4><p class="text-sm text-gray-500">GK, Maths, English सखोल अभ्यास</p>
+          {% elif forloop.counter == 4 %}<h4 class="font-bold">Mock Tests</h4><p class="text-sm text-gray-500">साप्ताहिक चाचणी परीक्षा</p>
+          {% elif forloop.counter == 5 %}<h4 class="font-bold">Hostel Facility</h4><p class="text-sm text-gray-500">राहण्याची व जेवणाची सुविधा</p>
+          {% elif forloop.counter == 6 %}<h4 class="font-bold">Medical Guidance</h4><p class="text-sm text-gray-500">Medical Fitness साठी मार्गदर्शन</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

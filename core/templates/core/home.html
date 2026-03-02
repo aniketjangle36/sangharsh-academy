@@ -1,0 +1,393 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- ============ HERO SECTION ============ -->
+<section class="hero-gradient min-h-screen flex items-center relative overflow-hidden">
+  <!-- Background overlay pattern -->
+  <div class="absolute inset-0 opacity-10"
+       style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><circle cx=%2230%22 cy=%2230%22 r=%222%22 fill=%22%23fff%22/></svg>')">
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-20 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Hero Text -->
+      <div class="text-white animate-fade-up">
+        <div class="inline-block bg-saffron text-white text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wider">
+          🎯 Admission Open 2026
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-4">
+          संघर्ष<br/>
+          <span class="text-saffron">करिअर</span><br/>
+          अकॅडमी
+        </h1>
+        <p class="text-xl md:text-2xl font-semibold text-gray-200 mb-2">Sangharsh Career Academy Phulambri</p>
+        <p class="text-lg text-saffron font-bold mb-6">🪖 आर्मी व पोलीस भरती पूर्व प्रशिक्षण केंद्र</p>
+        <p class="text-gray-300 mb-8 max-w-lg">
+          ता. फुलंब्री, जि. छत्रपती संभाजीनगर <br/>
+          महाराष्ट्रातील सर्वोत्तम आर्मी व पोलीस प्रशिक्षण केंद्र
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="{% url 'contact' %}"
+             class="bg-saffron hover:bg-orange-400 text-white font-bold px-8 py-4 rounded-full text-lg shadow-lg transition-all hover:scale-105">
+            🎓 Admission घ्या आता!
+          </a>
+          <a href="https://wa.me/{{ whatsapp_number }}?text=Admission%20inquiry"
+             target="_blank"
+             class="bg-green-500 hover:bg-green-400 text-white font-bold px-8 py-4 rounded-full text-lg shadow-lg transition-all hover:scale-105">
+            <i class="fab fa-whatsapp mr-2"></i>WhatsApp करा
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Cards -->
+      <div class="grid grid-cols-2 gap-4 animate-fade-up">
+        <a href="{% url 'army_training' %}"
+           class="bg-white bg-opacity-10 backdrop-blur border border-white border-opacity-20 rounded-2xl p-6 text-center card-hover text-white">
+          <div class="text-5xl mb-3">🪖</div>
+          <h3 class="font-bold text-lg">Army Training</h3>
+          <p class="text-saffron text-sm mt-1">Agniveer | NDA | CDS</p>
+        </a>
+        <a href="{% url 'police_training' %}"
+           class="bg-white bg-opacity-10 backdrop-blur border border-white border-opacity-20 rounded-2xl p-6 text-center card-hover text-white">
+          <div class="text-5xl mb-3">👮</div>
+          <h3 class="font-bold text-lg">Police Training</h3>
+          <p class="text-saffron text-sm mt-1">Constable | PSI | SRPF</p>
+        </a>
+        <a href="{% url 'past_results' %}"
+           class="bg-white bg-opacity-10 backdrop-blur border border-white border-opacity-20 rounded-2xl p-6 text-center card-hover text-white">
+          <div class="text-5xl mb-3">🏆</div>
+          <h3 class="font-bold text-lg">500+ Selected</h3>
+          <p class="text-saffron text-sm mt-1">सिद्ध यश</p>
+        </a>
+        <a href="{% url 'bharti_list' %}"
+           class="bg-saffron rounded-2xl p-6 text-center card-hover text-white">
+          <div class="text-5xl mb-3">📢</div>
+          <h3 class="font-bold text-lg">Latest Bharti</h3>
+          <p class="text-orange-100 text-sm mt-1">नवीन सरकारी भरती</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave bottom -->
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 60" class="w-full">
+      <path d="M0,30 C300,60 900,0 1200,30 L1200,60 L0,60 Z" fill="#f9fafb"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ LATEST BHARTI TICKER ============ -->
+{% if recent_bhartis %}
+<section class="bg-navyblue py-3">
+  <div class="max-w-7xl mx-auto px-4 flex items-center gap-4">
+    <span class="bg-saffron text-white text-xs font-bold px-3 py-1 rounded whitespace-nowrap">📢 LATEST BHARTI</span>
+    <div class="overflow-hidden flex-1">
+      <div class="flex gap-8 animate-[scroll_20s_linear_infinite] whitespace-nowrap">
+        {% for b in recent_bhartis %}
+        <a href="{{ b.url }}" target="_blank" class="text-white text-sm hover:text-saffron">
+          🔔 {{ b.title|truncatechars:80 }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    <a href="{% url 'bharti_list' %}" class="text-saffron text-xs font-bold hover:text-orange-300 whitespace-nowrap">सर्व पाहा →</a>
+  </div>
+</section>
+<style>
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+</style>
+{% endif %}
+
+<!-- ============ ACHIEVEMENT COUNTERS ============ -->
+<section id="counters-section" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-black text-navyblue mb-2">आमची उपलब्धी</h2>
+    <p class="text-gray-500 mb-10">Our Achievements</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="bg-gradient-to-b from-navyblue to-blue-900 text-white rounded-2xl p-6 shadow">
+        <div class="counter" data-count="{{ academy.students_selected }}">0+</div>
+        <p class="font-semibold mt-1">एकूण विद्यार्थी निवड</p>
+        <p class="text-saffron text-xs">Total Students Selected</p>
+      </div>
+      <div class="bg-gradient-to-b from-armygreen to-green-900 text-white rounded-2xl p-6 shadow">
+        <div class="counter" data-count="{{ academy.army_selected }}">0+</div>
+        <p class="font-semibold mt-1">आर्मीत निवड</p>
+        <p class="text-saffron text-xs">Army Selections</p>
+      </div>
+      <div class="bg-gradient-to-b from-saffron to-orange-600 text-white rounded-2xl p-6 shadow">
+        <div class="counter" data-count="{{ academy.police_selected }}">0+</div>
+        <p class="font-semibold mt-1">पोलीसमध्ये निवड</p>
+        <p class="text-saffron-dark text-xs">Police Selections</p>
+      </div>
+      <div class="bg-gradient-to-b from-gray-800 to-gray-900 text-white rounded-2xl p-6 shadow">
+        <div class="counter text-saffron" data-count="8">0+</div>
+        <p class="font-semibold mt-1">वर्षांचा अनुभव</p>
+        <p class="text-gray-400 text-xs">Years of Excellence</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT SECTION ============ -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      {% if academy.about_image %}
+        <img src="{{ academy.about_image.url }}" alt="Sangharsh Academy" class="rounded-2xl shadow-xl w-full object-cover"/>
+      {% else %}
+        <div class="bg-gradient-to-br from-navyblue to-armygreen rounded-2xl h-72 flex items-center justify-center text-white">
+          <div class="text-center">
+            <div class="text-6xl mb-4">🏫</div>
+            <p class="font-bold text-xl">संघर्ष अकॅडमी फुलंब्री</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    <div>
+      <span class="text-saffron font-bold uppercase tracking-wider text-sm">आमच्याविषयी | About Us</span>
+      <h2 class="text-3xl font-black text-navyblue mt-2 mb-4">
+        देशसेवेसाठी तयार करतो<br/>
+        <span class="text-armygreen">भावी रक्षकांना!</span>
+      </h2>
+      <p class="text-gray-600 mb-4 leading-relaxed">
+        {{ academy.about_text_mr|default:"संघर्ष करिअर अकॅडमी फुलंब्री हे महाराष्ट्रातील एक अग्रगण्य आर्मी व पोलीस भरती प्रशिक्षण केंद्र आहे. आमच्याकडे अनुभवी प्रशिक्षक, आधुनिक सुविधा आणि सिद्ध पद्धतींच्या माध्यमातून आम्ही विद्यार्थ्यांना यशाच्या मार्गावर घेऊन जातो." }}
+      </p>
+      <div class="grid grid-cols-2 gap-3 mb-6">
+        <div class="flex items-center gap-2 text-sm">
+          <span class="text-armygreen text-xl">✅</span> अनुभवी प्रशिक्षक
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+          <span class="text-armygreen text-xl">✅</span> Physical Training
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+          <span class="text-armygreen text-xl">✅</span> Written Exam Coaching
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+          <span class="text-armygreen text-xl">✅</span> Medical Fitness Guidance
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+          <span class="text-armygreen text-xl">✅</span> Mock Tests & Practice
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+          <span class="text-armygreen text-xl">✅</span> Interview Preparation
+        </div>
+      </div>
+      <a href="{% url 'about' %}" class="bg-navyblue text-white px-6 py-3 rounded-full font-bold hover:bg-blue-900 transition">
+        अधिक जाणून घ्या →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COURSES SECTION ============ -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-black text-navyblue">आमचे कोर्सेस</h2>
+      <p class="text-gray-500 mt-1">Our Training Programs</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <!-- ARMY COURSES -->
+      <div class="bg-gradient-to-br from-armygreen to-green-800 rounded-2xl p-6 text-white">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-4xl">🪖</span>
+          <div>
+            <h3 class="text-xl font-black">Army Training</h3>
+            <p class="text-green-200 text-sm">आर्मी प्रशिक्षण</p>
+          </div>
+        </div>
+        <div class="space-y-2">
+          {% for course in army_courses %}
+          <div class="bg-white bg-opacity-10 rounded-lg px-4 py-2 flex items-center justify-between">
+            <span class="font-semibold text-sm">{{ course.name_mr }}</span>
+            <span class="text-saffron font-bold text-sm">₹{{ course.fee|floatformat:0 }}</span>
+          </div>
+          {% empty %}
+          <div class="bg-white bg-opacity-10 rounded-lg px-4 py-2">
+            <p class="text-sm text-green-200">Agniveer Course | NDA | CDS | CRPF</p>
+          </div>
+          {% endfor %}
+        </div>
+        <a href="{% url 'army_training' %}" class="mt-4 inline-block bg-saffron text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-orange-400 transition">
+          Army Courses पाहा →
+        </a>
+      </div>
+
+      <!-- POLICE COURSES -->
+      <div class="bg-gradient-to-br from-navyblue to-blue-900 rounded-2xl p-6 text-white">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-4xl">👮</span>
+          <div>
+            <h3 class="text-xl font-black">Police Training</h3>
+            <p class="text-blue-200 text-sm">पोलीस प्रशिक्षण</p>
+          </div>
+        </div>
+        <div class="space-y-2">
+          {% for course in police_courses %}
+          <div class="bg-white bg-opacity-10 rounded-lg px-4 py-2 flex items-center justify-between">
+            <span class="font-semibold text-sm">{{ course.name_mr }}</span>
+            <span class="text-saffron font-bold text-sm">₹{{ course.fee|floatformat:0 }}</span>
+          </div>
+          {% empty %}
+          <div class="bg-white bg-opacity-10 rounded-lg px-4 py-2">
+            <p class="text-sm text-blue-200">Police Constable | PSI | SRPF | Traffic</p>
+          </div>
+          {% endfor %}
+        </div>
+        <a href="{% url 'police_training' %}" class="mt-4 inline-block bg-saffron text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-orange-400 transition">
+          Police Courses पाहा →
+        </a>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a href="{% url 'courses_fees' %}" class="bg-gray-800 text-white px-8 py-3 rounded-full font-bold hover:bg-gray-700 transition">
+        📋 सर्व कोर्सेस व फी पाहा
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LATEST BHARTI CARDS ============ -->
+{% if recent_bhartis %}
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-3xl font-black text-navyblue">नवीनतम भरती</h2>
+        <p class="text-gray-500">Latest Government Recruitments</p>
+      </div>
+      <a href="{% url 'bharti_list' %}" class="text-saffron font-bold hover:text-orange-600">सर्व पाहा →</a>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {% for b in recent_bhartis %}
+      <a href="{{ b.url }}" target="_blank"
+         class="bg-white border border-gray-200 rounded-xl p-4 card-hover shadow-sm hover:border-saffron">
+        <span class="rank-badge mb-2
+          {% if b.category == 'army' %}bg-green-100 text-green-700
+          {% elif b.category == 'maha_police' %}bg-blue-100 text-blue-700
+          {% else %}bg-orange-100 text-orange-700{% endif %}">
+          {{ b.get_category_display }}
+        </span>
+        <h4 class="text-sm font-bold text-gray-800 mt-2 mb-1 line-clamp-2">{{ b.title|truncatechars:80 }}</h4>
+        {% if b.last_date %}
+        <p class="text-xs text-red-600 font-semibold">🗓️ Last Date: {{ b.last_date }}</p>
+        {% endif %}
+        <p class="text-xs text-gray-400 mt-1">Apply करा →</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ============ TESTIMONIALS ============ -->
+{% if featured_stories %}
+<section class="py-16 bg-navyblue text-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-black">यशोगाथा</h2>
+      <p class="text-blue-300 mt-1">Success Stories of Our Students</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      {% for story in featured_stories %}
+      <div class="bg-white bg-opacity-10 rounded-2xl p-6 text-center card-hover border border-white border-opacity-10">
+        {% if story.photo %}
+          <img src="{{ story.photo.url }}" alt="{{ story.name }}"
+               class="w-20 h-20 rounded-full mx-auto mb-3 border-4 border-saffron object-cover"/>
+        {% else %}
+          <div class="w-20 h-20 rounded-full mx-auto mb-3 border-4 border-saffron bg-gray-700 flex items-center justify-center text-3xl">👤</div>
+        {% endif %}
+        <h4 class="font-bold text-lg">{{ story.name }}</h4>
+        <p class="text-saffron font-semibold text-sm">{{ story.rank_post }}</p>
+        <p class="text-blue-200 text-xs mb-3">{{ story.year }} {% if story.village %}| {{ story.village }}{% endif %}</p>
+        {% if story.testimonial_mr %}
+        <p class="text-gray-300 text-xs italic">"{{ story.testimonial_mr|truncatechars:100 }}"</p>
+        {% endif %}
+        <span class="rank-badge mt-3
+          {% if story.category == 'army' %}bg-green-500 text-white{% else %}bg-blue-500 text-white{% endif %}">
+          {{ story.get_category_display }}
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-8">
+      <a href="{% url 'past_results' %}" class="bg-saffron hover:bg-orange-400 text-white font-bold px-8 py-3 rounded-full transition">
+        🏆 सर्व यशोगाथा पाहा
+      </a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ============ GALLERY PREVIEW ============ -->
+{% if gallery_images %}
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-3xl font-black text-navyblue">गॅलरी</h2>
+        <p class="text-gray-500">Photo Gallery</p>
+      </div>
+      <a href="{% url 'gallery' %}" class="text-saffron font-bold hover:text-orange-600">सर्व फोटो →</a>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {% for img in gallery_images %}
+      <div class="overflow-hidden rounded-xl shadow card-hover">
+        <img src="{{ img.image.url }}" alt="{{ img.title }}"
+             class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300"/>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ============ GOOGLE MAP + CONTACT CTA ============ -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-8 items-center">
+    <div>
+      <h2 class="text-3xl font-black text-navyblue mb-4">आम्हाला भेट द्या</h2>
+      <p class="text-gray-600 mb-4">ता. फुलंब्री, जि. छत्रपती संभाजीनगर, महाराष्ट्र</p>
+      <div class="space-y-3 mb-6">
+        <a href="tel:{{ academy.phone }}"
+           class="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 hover:bg-gray-100 transition">
+          <span class="text-saffron text-xl"><i class="fas fa-phone-alt"></i></span>
+          <div>
+            <p class="text-xs text-gray-500">Call Now</p>
+            <p class="font-bold text-navyblue">{{ academy.phone }}</p>
+          </div>
+        </a>
+        <a href="https://wa.me/{{ whatsapp_number }}" target="_blank"
+           class="flex items-center gap-3 bg-green-50 rounded-xl px-4 py-3 hover:bg-green-100 transition">
+          <span class="text-green-500 text-xl"><i class="fab fa-whatsapp"></i></span>
+          <div>
+            <p class="text-xs text-gray-500">WhatsApp</p>
+            <p class="font-bold text-green-700">{{ academy.whatsapp }}</p>
+          </div>
+        </a>
+      </div>
+      <a href="{% url 'contact' %}" class="bg-saffron text-white font-bold px-8 py-4 rounded-full inline-block hover:bg-orange-400 transition">
+        📝 Admission Form भरा
+      </a>
+    </div>
+    <div class="rounded-2xl overflow-hidden shadow-xl h-64 lg:h-80 bg-gray-200">
+      {% if academy.google_map_embed %}
+        {{ academy.google_map_embed|safe }}
+      {% else %}
+        <iframe
+          src="https://maps.google.com/maps?q=Fulambri+Chhatrapati+Sambhajinagar+Maharashtra&output=embed"
+          width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"
+          class="w-full h-full">
+        </iframe>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

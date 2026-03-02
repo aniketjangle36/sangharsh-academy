@@ -1,0 +1,150 @@
+[
+  {
+    "model": "core.academyinfo",
+    "pk": 1,
+    "fields": {
+      "name_mr": "संघर्ष करिअर अकॅडमी फुलंब्री",
+      "name_en": "Sangharsh Career Academy Fulambri",
+      "tagline_mr": "आर्मी व पोलीस भरती पूर्व प्रशिक्षण केंद्र",
+      "tagline_en": "Army & Police Pre-Recruitment Training Centre",
+      "address_mr": "मुख्य बाजार, ता. फुलंब्री, जि. छत्रपती संभाजीनगर, महाराष्ट्र - 431111",
+      "address_en": "Main Market, Tal. Fulambri, Dist. Chhatrapati Sambhajinagar, Maharashtra - 431111",
+      "phone": "+91 98765 43210",
+      "whatsapp": "+919876543210",
+      "email": "sangharshacademy@gmail.com",
+      "established_year": 2018,
+      "logo": "",
+      "hero_image": "",
+      "about_image": "",
+      "about_text_mr": "संघर्ष करिअर अकॅडमी फुलंब्री ही महाराष्ट्रातील सर्वात विश्वासू भरती पूर्व प्रशिक्षण संस्था आहे. 2018 मध्ये स्थापित झालेल्या या अकॅडमीने आजपर्यंत 500 हून अधिक विद्यार्थ्यांना आर्मी, पोलीस व इतर सशस्त्र दलांत प्रवेश मिळवून देण्यात यश मिळवले आहे. अनुभवी प्रशिक्षक, आधुनिक सुविधा आणि शिस्तबद्ध दिनचर्यामुळे आमचे विद्यार्थी नेहमीच यशस्वी होतात.",
+      "about_text_en": "Sangharsh Career Academy Fulambri is one of Maharashtra's most trusted pre-recruitment training institutes. Established in 2018, the academy has helped over 500 students secure positions in Army, Police and other armed forces through expert coaching, modern facilities and disciplined training.",
+      "google_map_embed": "",
+      "students_selected": 500,
+      "army_selected": 50,
+      "police_selected": 200,
+      "meta_keywords": "army bharti, police bharti, Fulambri, Agniveer, संघर्ष अकॅडमी, Maharashtra Police, Chhatrapati Sambhajinagar",
+      "meta_description": "Join Sangharsh Career Academy Fulambri - Best Army & Police Pre-Recruitment Training Centre in Chhatrapati Sambhajinagar, Maharashtra"
+    }
+  },
+  {
+    "model": "core.course",
+    "pk": 1,
+    "fields": {
+      "name_mr": "अग्निवीर (GD) कोर्स",
+      "name_en": "Agniveer GD Course",
+      "category": "army",
+      "duration": "6months",
+      "fee": 15000,
+      "description_mr": "Indian Army Agniveer GD भरतीसाठी संपूर्ण तयारी. Physical Training, Written Exam, Medical Guidance.",
+      "description_en": "Complete preparation for Indian Army Agniveer GD recruitment. Physical Training, Written Exam, Medical Guidance.",
+      "eligibility_mr": "10वी उत्तीर्ण | वय: 17.5 - 21 वर्षे | उंची: 170 cm",
+      "eligibility_en": "10th Pass | Age: 17.5 - 21 years | Height: 170 cm",
+      "subjects": "GK, Math, Reasoning, Hindi/English, Physical Training",
+      "image": "",
+      "is_active": true,
+      "order": 1
+    }
+  },
+  {
+    "model": "core.course",
+    "pk": 2,
+    "fields": {
+      "name_mr": "पोलीस कॉन्स्टेबल कोर्स",
+      "name_en": "Police Constable Course",
+      "category": "police",
+      "duration": "6months",
+      "fee": 12000,
+      "description_mr": "Maharashtra Police Constable भरतीसाठी संपूर्ण तयारी कोर्स.",
+      "description_en": "Complete preparation course for Maharashtra Police Constable recruitment.",
+      "eligibility_mr": "12वी उत्तीर्ण | वय: 18-28 वर्षे | उंची: 165 cm (पुरुष)",
+      "eligibility_en": "12th Pass | Age: 18-28 years | Height: 165 cm (Male)",
+      "subjects": "Marathi, GK, Current Affairs, Reasoning, Physical Training",
+      "image": "",
+      "is_active": true,
+      "order": 1
+    }
+  },
+  {
+    "model": "core.course",
+    "pk": 3,
+    "fields": {
+      "name_mr": "अग्निवीर (Technical) कोर्स",
+      "name_en": "Agniveer Technical Course",
+      "category": "army",
+      "duration": "6months",
+      "fee": 18000,
+      "description_mr": "Army Agniveer Technical Trade साठी 12वी विज्ञान विद्यार्थ्यांसाठी विशेष कोर्स.",
+      "description_en": "Special course for 12th Science students for Army Agniveer Technical Trade.",
+      "eligibility_mr": "12वी विज्ञान (PCM) | वय: 17.5 - 21 वर्षे",
+      "eligibility_en": "12th Science (PCM) | Age: 17.5 - 21 years",
+      "subjects": "Physics, Chemistry, Math, GK, Physical Training",
+      "image": "",
+      "is_active": true,
+      "order": 2
+    }
+  },
+  {
+    "model": "core.course",
+    "pk": 4,
+    "fields": {
+      "name_mr": "PSI (पोलीस उपनिरीक्षक) कोर्स",
+      "name_en": "PSI - Police Sub Inspector Course",
+      "category": "police",
+      "duration": "1year",
+      "fee": 25000,
+      "description_mr": "Maharashtra PSI भरतीसाठी संपूर्ण 1 वर्षाचा Coaching कोर्स.",
+      "description_en": "Complete 1-year coaching course for Maharashtra PSI recruitment.",
+      "eligibility_mr": "पदवी उत्तीर्ण | वय: 19-31 वर्षे",
+      "eligibility_en": "Graduation required | Age: 19-31 years",
+      "subjects": "Marathi Law, GK, Reasoning, English, Current Affairs, Physical Training",
+      "image": "",
+      "is_active": true,
+      "order": 2
+    }
+  },
+  {
+    "model": "core.successstory",
+    "pk": 1,
+    "fields": {
+      "name": "रोहित देशमुख",
+      "photo": "",
+      "rank_post": "Agniveer GD - Indian Army",
+      "category": "army",
+      "year": 2024,
+      "village": "फुलंब्री",
+      "testimonial_mr": "संघर्ष अकॅडमीमुळे माझे आर्मीचे स्वप्न पूर्ण झाले. येथील प्रशिक्षण खूपच उत्कृष्ट आहे.",
+      "testimonial_en": "",
+      "is_featured": true
+    }
+  },
+  {
+    "model": "core.successstory",
+    "pk": 2,
+    "fields": {
+      "name": "प्रिया जाधव",
+      "photo": "",
+      "rank_post": "Police Constable - Maharashtra Police",
+      "category": "police",
+      "year": 2024,
+      "village": "औरंगाबाद",
+      "testimonial_mr": "या अकॅडमीचे Physical Training आणि Written Exam Coaching खूपच उपयुक्त होते.",
+      "testimonial_en": "",
+      "is_featured": true
+    }
+  },
+  {
+    "model": "core.successstory",
+    "pk": 3,
+    "fields": {
+      "name": "अमोल पाटील",
+      "photo": "",
+      "rank_post": "Agniveer Technical - Indian Army",
+      "category": "army",
+      "year": 2023,
+      "village": "वेरूळ",
+      "testimonial_mr": "संघर्ष अकॅडमीने मला सर्वोत्तम मार्गदर्शन दिले.",
+      "testimonial_en": "",
+      "is_featured": true
+    }
+  }
+]

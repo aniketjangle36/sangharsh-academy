@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="hero-gradient py-16 text-white text-center">
+  <h1 class="text-4xl font-black">कोर्सेस आणि फी</h1>
+  <p class="text-saffron text-lg mt-2">Courses & Fee Structure 2026</p>
+</div>
+
+<section class="py-16 max-w-7xl mx-auto px-4">
+
+  <!-- NOTE -->
+  <div class="bg-yellow-50 border-l-4 border-saffron rounded-xl p-4 mb-10 text-sm text-yellow-800">
+    <strong>📌 नोट:</strong> फी वेळोवेळी बदलू शकते. अधिक माहितीसाठी थेट संपर्क करा किंवा WhatsApp करा.
+  </div>
+
+  <!-- ARMY COURSES TABLE -->
+  <h2 class="text-2xl font-black text-armygreen mb-4 flex items-center gap-2">
+    <span>🪖</span> Army Courses
+  </h2>
+  <div class="overflow-x-auto mb-12 rounded-2xl shadow">
+    <table class="w-full bg-white text-sm">
+      <thead>
+        <tr class="bg-armygreen text-white">
+          <th class="px-4 py-3 text-left">कोर्स</th>
+          <th class="px-4 py-3 text-left">कालावधी</th>
+          <th class="px-4 py-3 text-left">विषय</th>
+          <th class="px-4 py-3 text-left">फी (₹)</th>
+          <th class="px-4 py-3 text-left">Admission</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in army_courses %}
+        <tr class="border-b hover:bg-green-50">
+          <td class="px-4 py-3 font-semibold">{{ course.name_mr }}<br/><span class="text-gray-400 text-xs">{{ course.name_en }}</span></td>
+          <td class="px-4 py-3">{{ course.get_duration_display }}</td>
+          <td class="px-4 py-3 text-gray-500">{{ course.subjects|truncatechars:50 }}</td>
+          <td class="px-4 py-3 font-black text-armygreen text-base">₹{{ course.fee|floatformat:0 }}</td>
+          <td class="px-4 py-3">
+            <a href="{% url 'contact' %}" class="bg-saffron text-white text-xs px-3 py-1.5 rounded-full font-bold hover:bg-orange-400">Apply</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="px-4 py-8 text-center text-gray-400">
+          कोर्स माहिती लवकरच येईल | Admin मधून add करा
+        </td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- POLICE COURSES TABLE -->
+  <h2 class="text-2xl font-black text-navyblue mb-4 flex items-center gap-2">
+    <span>👮</span> Police Courses
+  </h2>
+  <div class="overflow-x-auto mb-12 rounded-2xl shadow">
+    <table class="w-full bg-white text-sm">
+      <thead>
+        <tr class="bg-navyblue text-white">
+          <th class="px-4 py-3 text-left">कोर्स</th>
+          <th class="px-4 py-3 text-left">कालावधी</th>
+          <th class="px-4 py-3 text-left">विषय</th>
+          <th class="px-4 py-3 text-left">फी (₹)</th>
+          <th class="px-4 py-3 text-left">Admission</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in police_courses %}
+        <tr class="border-b hover:bg-blue-50">
+          <td class="px-4 py-3 font-semibold">{{ course.name_mr }}<br/><span class="text-gray-400 text-xs">{{ course.name_en }}</span></td>
+          <td class="px-4 py-3">{{ course.get_duration_display }}</td>
+          <td class="px-4 py-3 text-gray-500">{{ course.subjects|truncatechars:50 }}</td>
+          <td class="px-4 py-3 font-black text-navyblue text-base">₹{{ course.fee|floatformat:0 }}</td>
+          <td class="px-4 py-3">
+            <a href="{% url 'contact' %}" class="bg-saffron text-white text-xs px-3 py-1.5 rounded-full font-bold hover:bg-orange-400">Apply</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="px-4 py-8 text-center text-gray-400">
+          कोर्स माहिती लवकरच येईल | Admin मधून add करा
+        </td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CTA -->
+  <div class="bg-navyblue text-white rounded-2xl p-8 text-center">
+    <h3 class="text-2xl font-black mb-2">Admission Open 2026 🎓</h3>
+    <p class="text-gray-300 mb-6">आजच संपर्क करा आणि तुमचे स्वप्न पूर्ण करण्याचा पहिला पाऊल उचला!</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="{% url 'contact' %}" class="bg-saffron text-white font-bold px-8 py-3 rounded-full hover:bg-orange-400 transition">📝 Admission Form</a>
+      <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" class="bg-green-500 text-white font-bold px-8 py-3 rounded-full hover:bg-green-400 transition">
+        <i class="fab fa-whatsapp mr-2"></i>WhatsApp करा
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

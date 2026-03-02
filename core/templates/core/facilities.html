@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="hero-gradient py-16 text-white text-center">
+  <h1 class="text-4xl font-black">सुविधा आणि पायाभूत</h1>
+  <p class="text-saffron text-lg mt-2">Facilities & Infrastructure</p>
+</div>
+
+<section class="py-16 max-w-7xl mx-auto px-4">
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    {% with facilities="1,2,3,4,5,6,7,8,9"|split:"," %}
+    <div class="bg-white rounded-2xl shadow p-6 text-center card-hover border border-gray-100">
+      <div class="text-5xl mb-4">🏃</div>
+      <h3 class="font-black text-navyblue text-lg">Running Track</h3>
+      <p class="text-gray-500 text-sm mt-2">400m standard track. रोज पहाटे 5 वाजल्यापासून Physical Training.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6 text-center card-hover border border-gray-100">
+      <div class="text-5xl mb-4">🏋️</div>
+      <h3 class="font-black text-navyblue text-lg">Gymnasium</h3>
+      <p class="text-gray-500 text-sm mt-2">Modern gym with strength training & conditioning equipment.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6 text-center card-hover border border-gray-100">
+      <div class="text-5xl mb-4">📖</div>
+      <h3 class="font-black text-navyblue text-lg">अभ्यासिका (Study Hall)</h3>
+      <p class="text-gray-500 text-sm mt-2">शांत वातावरणात अभ्यास करण्यासाठी Library व Reading Room.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6 text-center card-hover border border-gray-100">
+      <div class="text-5xl mb-4">🛏️</div>
+      <h3 class="font-black text-navyblue text-lg">Hostel</h3>
+      <p class="text-gray-500 text-sm mt-2">स्वच्छ व सुरक्षित वसतिगृह. जेवण व राहण्याची उत्कृष्ट सोय.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6 text-center card-hover border border-gray-100">
+      <div class="text-5xl mb-4">💻</div>
+      <h3 class="font-black text-navyblue text-lg">Digital Classroom</h3>
+      <p class="text-gray-500 text-sm mt-2">Smart Board, Projector, Online Mock Tests व Video Lectures.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6 text-center card-hover border border-gray-100">
+      <div class="text-5xl mb-4">🍽️</div>
+      <h3 class="font-black text-navyblue text-lg">Mess / Canteen</h3>
+      <p class="text-gray-500 text-sm mt-2">पौष्टिक व स्वच्छ जेवण. सकाळ / दुपार / रात्र तिन्ही वेळचे.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6 text-center card-hover border border-gray-100">
+      <div class="text-5xl mb-4">🩺</div>
+      <h3 class="font-black text-navyblue text-lg">Medical Room</h3>
+      <p class="text-gray-500 text-sm mt-2">First Aid facility. Medical fitness preparation guidance.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6 text-center card-hover border border-gray-100">
+      <div class="text-5xl mb-4">🏊</div>
+      <h3 class="font-black text-navyblue text-lg">Swimming Pool</h3>
+      <p class="text-gray-500 text-sm mt-2">Swimming training for Navy & coastal police fitness tests.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6 text-center card-hover border border-gray-100">
+      <div class="text-5xl mb-4">🔒</div>
+      <h3 class="font-black text-navyblue text-lg">24/7 Security</h3>
+      <p class="text-gray-500 text-sm mt-2">CCTV surveillance, Security Guard. पूर्णपणे सुरक्षित campus.</p>
+    </div>
+    {% endwith %}
+  </div>
+
+  <!-- CTA -->
+  <div class="mt-12 bg-navyblue text-white rounded-2xl p-8 text-center">
+    <h3 class="text-2xl font-black mb-2">या सुविधांचा लाभ घ्या!</h3>
+    <p class="text-gray-300 mb-6">Admission घेण्यासाठी आजच संपर्क करा.</p>
+    <a href="{% url 'contact' %}" class="bg-saffron text-white font-bold px-8 py-3 rounded-full hover:bg-orange-400 transition">
+      संपर्क करा →
+    </a>
+  </div>
+
+</section>
+{% endblock %}

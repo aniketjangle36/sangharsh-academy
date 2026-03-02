@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="mr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}{{ page_title|default:"संघर्ष करिअर अकॅडमी फुलंब्री" }}{% endblock %} | संघर्ष अकॅडमी</title>
+  <meta name="description" content="{% block meta_desc %}{{ meta_desc|default:"आर्मी व पोलीस भरती पूर्व प्रशिक्षण केंद्र – संघर्ष करिअर अकॅडमी फुलंब्री" }}{% endblock %}"/>
+  <meta name="keywords" content="{{ site_academy.meta_keywords }}"/>
+  <meta property="og:title" content="{% block og_title %}संघर्ष करिअर अकॅडमी फुलंब्री{% endblock %}"/>
+  <meta property="og:description" content="{{ site_academy.tagline_en }}"/>
+  <meta property="og:type" content="website"/>
+  <meta name="robots" content="index,follow"/>
+  <link rel="canonical" href="{{ request.build_absolute_uri }}"/>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            saffron: { DEFAULT: '#FF9933', dark: '#e6851a', light: '#ffb366' },
+            armygreen: { DEFAULT: '#006400', dark: '#004d00', light: '#1a8a1a' },
+            navyblue: { DEFAULT: '#002366', dark: '#001a4d', light: '#1a3a80' },
+          },
+          fontFamily: {
+            marathi: ['"Noto Sans Devanagari"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Noto Sans Devanagari for Marathi -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    body { font-family: 'Noto Sans Devanagari', 'Rajdhani', sans-serif; }
+    .hero-gradient { background: linear-gradient(135deg, #002366 0%, #006400 50%, #FF9933 100%); }
+    .tricolor-bar { background: linear-gradient(90deg, #FF9933 33%, #ffffff 33%, #ffffff 66%, #006400 66%); }
+    .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.15); }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #FF9933; transition: width .3s; }
+    .nav-link:hover::after { width: 100%; }
+    .counter { font-size: 2.5rem; font-weight: 900; color: #FF9933; }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    .animate-fade-up { animation: fadeInUp .6s ease both; }
+    .whatsapp-float { position: fixed; bottom: 90px; right: 20px; z-index: 9999; }
+    .admission-sticky { position: fixed; bottom: 20px; left: 20px; z-index: 9998; }
+    .rank-badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+  </style>
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-gray-50 text-gray-800 font-marathi">
+
+<!-- ============ NAVBAR ============ -->
+<nav class="bg-navyblue shadow-lg sticky top-0 z-50">
+  <div class="tricolor-bar h-1"></div>
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+
+    <!-- LOGO + NAME -->
+    <a href="{% url 'home' %}" class="flex items-center gap-3">
+      {% if site_academy.logo %}
+        <img src="{{ site_academy.logo.url }}" alt="logo" class="h-12 w-12 rounded-full border-2 border-saffron"/>
+      {% else %}
+        <div class="h-12 w-12 rounded-full bg-saffron flex items-center justify-center text-white font-bold text-xl">स</div>
+      {% endif %}
+      <div>
+        <div class="text-white font-bold text-sm leading-tight">संघर्ष करिअर अकॅडमी</div>
+        <div class="text-saffron text-xs">Fulambri | Army & Police Training</div>
+      </div>
+    </a>
+
+    <!-- DESKTOP MENU -->
+    <div class="hidden lg:flex items-center gap-6 text-sm font-semibold">
+      <a href="{% url 'home' %}" class="nav-link text-white hover:text-saffron">🏠 Home</a>
+      <a href="{% url 'army_training' %}" class="nav-link text-white hover:text-saffron">🪖 Army</a>
+      <a href="{% url 'police_training' %}" class="nav-link text-white hover:text-saffron">👮 Police</a>
+      <a href="{% url 'courses_fees' %}" class="nav-link text-white hover:text-saffron">📋 Courses</a>
+      <a href="{% url 'past_results' %}" class="nav-link text-white hover:text-saffron">🏆 Results</a>
+      <a href="{% url 'bharti_list' %}" class="nav-link text-white hover:text-saffron">📢 Bharti</a>
+      <a href="{% url 'gallery' %}" class="nav-link text-white hover:text-saffron">🖼️ Gallery</a>
+      <a href="{% url 'contact' %}" class="nav-link text-white hover:text-saffron">📞 Contact</a>
+      <a href="https://wa.me/{{ whatsapp_number }}?text=Admission%20inquiry%20-%20Sangharsh%20Academy%20Fulambri" target="_blank"
+         class="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-full text-xs font-bold transition">
+        <i class="fab fa-whatsapp mr-1"></i> WhatsApp
+      </a>
+    </div>
+
+    <!-- MOBILE HAMBURGER -->
+    <button id="menuBtn" class="lg:hidden text-white text-2xl focus:outline-none">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="hidden lg:hidden bg-navyblue border-t border-blue-800 px-4 pb-4">
+    <div class="grid grid-cols-2 gap-2 pt-3 text-sm">
+      <a href="{% url 'home' %}" class="text-white hover:text-saffron py-2 px-3 rounded hover:bg-blue-900">🏠 Home</a>
+      <a href="{% url 'army_training' %}" class="text-white hover:text-saffron py-2 px-3 rounded hover:bg-blue-900">🪖 Army Training</a>
+      <a href="{% url 'police_training' %}" class="text-white hover:text-saffron py-2 px-3 rounded hover:bg-blue-900">👮 Police Training</a>
+      <a href="{% url 'courses_fees' %}" class="text-white hover:text-saffron py-2 px-3 rounded hover:bg-blue-900">📋 Courses & Fees</a>
+      <a href="{% url 'past_results' %}" class="text-white hover:text-saffron py-2 px-3 rounded hover:bg-blue-900">🏆 Results</a>
+      <a href="{% url 'bharti_list' %}" class="text-white hover:text-saffron py-2 px-3 rounded hover:bg-blue-900">📢 Bharti Updates</a>
+      <a href="{% url 'gallery' %}" class="text-white hover:text-saffron py-2 px-3 rounded hover:bg-blue-900">🖼️ Gallery</a>
+      <a href="{% url 'facilities' %}" class="text-white hover:text-saffron py-2 px-3 rounded hover:bg-blue-900">🏋️ Facilities</a>
+      <a href="{% url 'about' %}" class="text-white hover:text-saffron py-2 px-3 rounded hover:bg-blue-900">ℹ️ About Us</a>
+      <a href="{% url 'contact' %}" class="text-white hover:text-saffron py-2 px-3 rounded hover:bg-blue-900">📞 Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- MESSAGES -->
+{% if messages %}
+<div class="max-w-7xl mx-auto px-4 mt-3">
+  {% for msg in messages %}
+  <div class="p-3 rounded mb-2 text-sm font-semibold
+    {% if msg.tags == 'success' %}bg-green-100 text-green-700 border border-green-300
+    {% elif msg.tags == 'error' %}bg-red-100 text-red-700 border border-red-300
+    {% else %}bg-blue-100 text-blue-700 border border-blue-300{% endif %}">
+    {{ msg }}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- MAIN CONTENT -->
+{% block content %}{% endblock %}
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-navyblue text-white mt-12">
+  <div class="tricolor-bar h-1.5"></div>
+  <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <!-- COL 1: ACADEMY INFO -->
+    <div>
+      <h3 class="text-saffron font-bold text-lg mb-3">संघर्ष करिअर अकॅडमी फुलंब्री</h3>
+      <p class="text-gray-300 text-sm mb-2">{{ site_academy.tagline_mr }}</p>
+      <p class="text-gray-400 text-sm">
+        <i class="fas fa-map-marker-alt text-saffron mr-2"></i>{{ site_academy.address_mr }}
+      </p>
+    </div>
+
+    <!-- COL 2: QUICK LINKS -->
+    <div>
+      <h3 class="text-saffron font-bold text-lg mb-3">Quick Links</h3>
+      <div class="grid grid-cols-2 gap-1 text-sm">
+        <a href="{% url 'army_training' %}" class="text-gray-300 hover:text-saffron">→ Army Training</a>
+        <a href="{% url 'police_training' %}" class="text-gray-300 hover:text-saffron">→ Police Training</a>
+        <a href="{% url 'courses_fees' %}" class="text-gray-300 hover:text-saffron">→ Courses & Fees</a>
+        <a href="{% url 'past_results' %}" class="text-gray-300 hover:text-saffron">→ Results</a>
+        <a href="{% url 'bharti_list' %}" class="text-gray-300 hover:text-saffron">→ Bharti Updates</a>
+        <a href="{% url 'gallery' %}" class="text-gray-300 hover:text-saffron">→ Gallery</a>
+        <a href="{% url 'facilities' %}" class="text-gray-300 hover:text-saffron">→ Facilities</a>
+        <a href="{% url 'contact' %}" class="text-gray-300 hover:text-saffron">→ Contact</a>
+      </div>
+    </div>
+
+    <!-- COL 3: CONTACT -->
+    <div>
+      <h3 class="text-saffron font-bold text-lg mb-3">संपर्क करा</h3>
+      <div class="space-y-2 text-sm text-gray-300">
+        <p><i class="fas fa-phone text-saffron mr-2"></i><a href="tel:{{ site_academy.phone }}" class="hover:text-white">{{ site_academy.phone }}</a></p>
+        <p><i class="fab fa-whatsapp text-green-400 mr-2"></i>
+          <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" class="hover:text-white">WhatsApp: {{ site_academy.whatsapp }}</a>
+        </p>
+        {% if site_academy.email %}
+        <p><i class="fas fa-envelope text-saffron mr-2"></i><a href="mailto:{{ site_academy.email }}" class="hover:text-white">{{ site_academy.email }}</a></p>
+        {% endif %}
+        <p class="mt-3 text-xs text-gray-500">स्थापना: {{ site_academy.established_year }} | ता. फुलंब्री, जि. छत्रपती संभाजीनगर, महाराष्ट्र</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-blue-900 text-center py-4 text-xs text-gray-500">
+    © 2026 संघर्ष करिअर अकॅडमी फुलंब्री | All Rights Reserved
+  </div>
+</footer>
+
+<!-- ============ FLOATING BUTTONS ============ -->
+<!-- WhatsApp Float -->
+<a href="https://wa.me/{{ whatsapp_number }}?text=Admission%20Inquiry%20-%20Sangharsh%20Academy"
+   target="_blank" class="whatsapp-float group">
+  <div class="bg-green-500 hover:bg-green-400 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+    <i class="fab fa-whatsapp text-3xl"></i>
+  </div>
+  <span class="absolute right-16 top-3 bg-black text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition">WhatsApp करा</span>
+</a>
+
+<!-- Admission Sticky CTA -->
+<a href="{% url 'contact' %}"
+   class="admission-sticky bg-saffron hover:bg-saffron-dark text-white px-4 py-2 rounded-full shadow-lg font-bold text-sm transition-transform hover:scale-105 flex items-center gap-2">
+  <i class="fas fa-graduation-cap"></i> Admission Open – Call Now!
+</a>
+
+<!-- Mobile menu toggle script -->
+<script>
+  document.getElementById('menuBtn').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  });
+
+  // Counter animation
+  function animateCounters() {
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      let current = 0;
+      const step = target / 60;
+      const interval = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current) + '+';
+        if (current >= target) clearInterval(interval);
+      }, 25);
+    });
+  }
+
+  // Intersection observer for counters
+  const counterSection = document.getElementById('counters-section');
+  if (counterSection) {
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) animateCounters();
+    }, { threshold: 0.3 }).observe(counterSection);
+  }
+</script>
+
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

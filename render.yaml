@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: sangharsh-academy
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate"
+    startCommand: "gunicorn sangharsh_academy.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "sangharsh-academy.onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sangharsh-db
+          property: connectionString
+
+databases:
+  - name: sangharsh-db
+    databaseName: sangharsh_academy
+    user: sangharsh_user

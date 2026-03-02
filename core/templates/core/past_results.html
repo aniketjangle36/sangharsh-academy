@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="bg-gradient-to-r from-yellow-500 via-saffron to-orange-600 py-16 text-white text-center">
+  <div class="text-5xl mb-3">🏆</div>
+  <h1 class="text-4xl font-black">मागील निकाल व यशोगाथा</h1>
+  <p class="text-orange-100 text-lg mt-2">Past Results & Success Stories</p>
+</div>
+
+<!-- Stats Bar -->
+<div class="bg-navyblue text-white">
+  <div class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-3 gap-4 text-center">
+    <div>
+      <div class="text-3xl font-black text-saffron">{{ academy.students_selected }}+</div>
+      <p class="text-sm text-gray-300">एकूण निवड</p>
+    </div>
+    <div>
+      <div class="text-3xl font-black text-green-400">{{ academy.army_selected }}+</div>
+      <p class="text-sm text-gray-300">Army निवड</p>
+    </div>
+    <div>
+      <div class="text-3xl font-black text-blue-300">{{ academy.police_selected }}+</div>
+      <p class="text-sm text-gray-300">Police निवड</p>
+    </div>
+  </div>
+</div>
+
+<section class="py-16 max-w-7xl mx-auto px-4">
+
+  <!-- ARMY RESULTS -->
+  <h2 class="text-2xl font-black text-armygreen mb-6 flex items-center gap-2">
+    🪖 Army सेवेत रुजू
+  </h2>
+  {% if army_stories %}
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+    {% for story in army_stories %}
+    <div class="bg-white rounded-2xl shadow border border-gray-100 p-4 text-center card-hover">
+      {% if story.photo %}
+        <img src="{{ story.photo.url }}" alt="{{ story.name }}"
+             class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-armygreen"/>
+      {% else %}
+        <div class="w-20 h-20 rounded-full mx-auto mb-3 bg-green-100 border-4 border-armygreen flex items-center justify-center text-3xl">👤</div>
+      {% endif %}
+      <h4 class="font-black text-navyblue">{{ story.name }}</h4>
+      <span class="rank-badge bg-green-100 text-green-700 mt-1 inline-block">{{ story.rank_post }}</span>
+      <p class="text-xs text-gray-400 mt-1">{{ story.year }}{% if story.village %} | {{ story.village }}{% endif %}</p>
+      {% if story.testimonial_mr %}
+      <p class="text-xs text-gray-500 mt-2 italic line-clamp-2">"{{ story.testimonial_mr }}"</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="bg-green-50 rounded-xl p-6 text-center text-green-700 mb-12">
+    यशोगाथा Admin मधून add करा | Success stories coming soon
+  </div>
+  {% endif %}
+
+  <!-- POLICE RESULTS -->
+  <h2 class="text-2xl font-black text-navyblue mb-6 flex items-center gap-2">
+    👮 Police सेवेत रुजू
+  </h2>
+  {% if police_stories %}
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    {% for story in police_stories %}
+    <div class="bg-white rounded-2xl shadow border border-gray-100 p-4 text-center card-hover">
+      {% if story.photo %}
+        <img src="{{ story.photo.url }}" alt="{{ story.name }}"
+             class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-navyblue"/>
+      {% else %}
+        <div class="w-20 h-20 rounded-full mx-auto mb-3 bg-blue-100 border-4 border-navyblue flex items-center justify-center text-3xl">👤</div>
+      {% endif %}
+      <h4 class="font-black text-navyblue">{{ story.name }}</h4>
+      <span class="rank-badge bg-blue-100 text-blue-700 mt-1 inline-block">{{ story.rank_post }}</span>
+      <p class="text-xs text-gray-400 mt-1">{{ story.year }}{% if story.village %} | {{ story.village }}{% endif %}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="bg-blue-50 rounded-xl p-6 text-center text-blue-700">
+    यशोगाथा लवकरच येतील | Police success stories coming soon
+  </div>
+  {% endif %}
+
+</section>
+{% endblock %}

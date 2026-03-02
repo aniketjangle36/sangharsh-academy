@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if category == 'army' %}
+<div class="bg-gradient-to-r from-armygreen to-green-900 py-16 text-white text-center">
+  <div class="text-6xl mb-3">🪖</div>
+  <h1 class="text-4xl font-black">आर्मी प्रशिक्षण</h1>
+  <p class="text-green-200 text-lg mt-2">Army Pre-Recruitment Training</p>
+  <p class="text-saffron font-semibold mt-1">Agniveer | NDA | CDS | CRPF | BSF</p>
+</div>
+{% else %}
+<div class="bg-gradient-to-r from-navyblue to-blue-900 py-16 text-white text-center">
+  <div class="text-6xl mb-3">👮</div>
+  <h1 class="text-4xl font-black">पोलीस प्रशिक्षण</h1>
+  <p class="text-blue-200 text-lg mt-2">Police Pre-Recruitment Training</p>
+  <p class="text-saffron font-semibold mt-1">Police Constable | PSI | SRPF | Traffic Police</p>
+</div>
+{% endif %}
+
+<section class="py-16 max-w-7xl mx-auto px-4">
+
+  <!-- Overview -->
+  <div class="grid lg:grid-cols-3 gap-6 mb-12">
+    <div class="bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="text-4xl mb-2">📚</div>
+      <h3 class="font-bold text-navyblue">Written Exam</h3>
+      <p class="text-sm text-gray-500 mt-1">GK, Math, Reasoning, Marathi, English</p>
+    </div>
+    <div class="bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="text-4xl mb-2">🏃</div>
+      <h3 class="font-bold text-navyblue">Physical Training</h3>
+      <p class="text-sm text-gray-500 mt-1">Running, Pull-ups, Long jump, Chest</p>
+    </div>
+    <div class="bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="text-4xl mb-2">🩺</div>
+      <h3 class="font-bold text-navyblue">Medical Fitness</h3>
+      <p class="text-sm text-gray-500 mt-1">Height, Weight, Vision, Health tips</p>
+    </div>
+  </div>
+
+  <!-- Courses -->
+  <h2 class="text-2xl font-black text-navyblue mb-6">उपलब्ध कोर्सेस</h2>
+  {% if courses %}
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+    {% for course in courses %}
+    <div class="bg-white rounded-2xl shadow border border-gray-100 overflow-hidden card-hover">
+      {% if course.image %}
+        <img src="{{ course.image.url }}" alt="{{ course.name_en }}" class="w-full h-40 object-cover"/>
+      {% else %}
+        <div class="h-40 {% if category == 'army' %}bg-gradient-to-br from-armygreen to-green-700{% else %}bg-gradient-to-br from-navyblue to-blue-800{% endif %} flex items-center justify-center text-5xl text-white">
+          {% if category == 'army' %}🪖{% else %}👮{% endif %}
+        </div>
+      {% endif %}
+      <div class="p-5">
+        <h3 class="font-black text-lg text-navyblue">{{ course.name_mr }}</h3>
+        <p class="text-gray-500 text-sm">{{ course.name_en }}</p>
+        <div class="flex items-center gap-3 mt-3">
+          <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">⏱️ {{ course.get_duration_display }}</span>
+          <span class="bg-saffron text-white text-xs px-3 py-1 rounded-full font-bold">₹{{ course.fee|floatformat:0 }}</span>
+        </div>
+        {% if course.description_mr %}
+        <p class="text-sm text-gray-600 mt-3 line-clamp-2">{{ course.description_mr }}</p>
+        {% endif %}
+        {% if course.subjects %}
+        <div class="flex flex-wrap gap-1 mt-3">
+          {% for sub in course.get_subjects_list %}
+          <span class="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded">{{ sub }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <a href="{% url 'contact' %}" class="mt-4 block text-center bg-saffron text-white py-2 rounded-xl font-bold text-sm hover:bg-orange-400 transition">
+          Admission साठी संपर्क करा
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 text-center text-yellow-700">
+    <p>कोर्स माहिती लवकरच अपडेट केली जाईल. Admin मधून कोर्स add करा.</p>
+  </div>
+  {% endif %}
+
+  <!-- Eligibility -->
+  <div class="bg-navyblue text-white rounded-2xl p-8">
+    <h2 class="text-2xl font-black mb-6 text-saffron">पात्रता | Eligibility Criteria</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="font-bold mb-3">🎓 शैक्षणिक पात्रता</h3>
+        <ul class="space-y-2 text-sm text-gray-300">
+          {% if category == 'army' %}
+          <li>✓ 10वी उत्तीर्ण (Agniveer GD, Tradesman)</li>
+          <li>✓ 12वी विज्ञान (Agniveer Technical)</li>
+          <li>✓ 12वी कोणत्याही शाखेत (Agniveer Clerk)</li>
+          {% else %}
+          <li>✓ 12वी उत्तीर्ण (Police Constable)</li>
+          <li>✓ पदवी (PSI - Sub Inspector)</li>
+          <li>✓ 10वी/12वी (Homeguard, Rakshak)</li>
+          {% endif %}
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-3">📏 शारीरिक मापदंड</h3>
+        <ul class="space-y-2 text-sm text-gray-300">
+          {% if category == 'army' %}
+          <li>✓ उंची: 170 cm (GD), 157 cm (Clerk)</li>
+          <li>✓ वजन: उंचीनुसार</li>
+          <li>✓ छाती: 77-82 cm (GD)</li>
+          <li>✓ वय: 17.5 – 21 वर्षे (Agniveer)</li>
+          {% else %}
+          <li>✓ पुरुष उंची: 165 cm</li>
+          <li>✓ महिला उंची: 155 cm</li>
+          <li>✓ वय: 18-28 वर्षे (OBC/SC/ST relaxation)</li>
+          <li>✓ दौड: 1600m 5:45 मिनिटात</li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</section>
+{% endblock %}
